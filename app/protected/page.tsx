@@ -1,5 +1,4 @@
 import AuthButton from "@/components/AuthButton";
-import Messages from "@/components/Messages";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -17,7 +16,6 @@ export default async function ProtectedPage() {
   return (
     <>
       <AuthButton />
-      <Messages />
     </>
   );
 }
