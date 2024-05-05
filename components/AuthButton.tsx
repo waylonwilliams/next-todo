@@ -25,8 +25,10 @@ export default async function AuthButton() {
       </form>
     </div>
   ) : (
-    <button className="btn">
-      <Link href="/login">Login</Link>
-    </button>
+    <div className="flex bg-neutral justify-end p-2">
+      <button className="btn btn-neutral-content m-2">
+        <Link href="/login">Login</Link>
+      </button>
+    </div>
   );
 }

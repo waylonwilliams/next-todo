@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import { Poppins } from "next/font/google";
-const globalFont = Poppins({ subsets: ["latin"], weight: "300" });
+const globalFont = Poppins({ subsets: ["latin"], weight: ["300", "700"] });
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`

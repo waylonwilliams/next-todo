@@ -10,13 +10,16 @@ export default async function Index() {
 
   return (
     <div>
-      <div>
-        <AuthButton />
-      </div>
-      <div>
-        <div>Home page</div>
-        {/* conditional for login or to protected page based on logged in */}
-        <div>{user && <Link href={"/protected"}>Protected page</Link>}</div>
+      <AuthButton />
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-black font-bold text-6xl">Home page</div>
+        <div className="btn btn-primary btn-lg">
+          {user ? (
+            <Link href={"/protected"}>Continue to your to-do</Link>
+          ) : (
+            <Link href={"/login"}>Get started</Link>
+          )}
+        </div>
       </div>
     </div>
   );
