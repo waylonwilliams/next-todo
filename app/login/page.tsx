@@ -52,37 +52,50 @@ export default function Login({
   };
 
   return (
-    <div>
-      <div>
-        <Link href="/">Back</Link>
+    <>
+      <Link href="/" className="btn btn-secondary m-2 absolute top-0 left-0">
+        Back
+      </Link>
+      <div className="flex items-center justify-center h-screen">
+        <div className="bg-base-200 w-1/4 h-1/3 flex items-center justify-center">
+          <form>
+            <div>
+              <input
+                name="email"
+                placeholder="Email"
+                required
+                className="input mb-3 input-lg text-base w-full"
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+                className="input input-lg text-base w-full"
+              />
+            </div>
+            <div className="flex justify-between">
+              <SubmitButton
+                formAction={signIn}
+                pendingText="Signing In..."
+                className="btn btn-secondary mt-5"
+              >
+                Sign In
+              </SubmitButton>
+              <SubmitButton
+                formAction={signUp}
+                pendingText="Signing Up..."
+                className="btn btn-primary mt-5"
+              >
+                Sign Up
+              </SubmitButton>
+            </div>
+            <div>{searchParams?.message && <p>{searchParams.message}</p>}</div>
+          </form>
+        </div>
       </div>
-
-      <form>
-        <div>
-          <label className="text-md" htmlFor="email">
-            Email
-          </label>
-          <input name="email" placeholder="you@example.com" required />
-        </div>
-        <div>
-          <label className="text-md" htmlFor="password">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            placeholder="••••••••"
-            required
-          />
-        </div>
-        <SubmitButton formAction={signIn} pendingText="Signing In...">
-          Sign In
-        </SubmitButton>
-        <SubmitButton formAction={signUp} pendingText="Signing Up...">
-          Sign Up
-        </SubmitButton>
-        <div>{searchParams?.message && <p>{searchParams.message}</p>}</div>
-      </form>
-    </div>
+    </>
   );
 }
