@@ -1,0 +1,44 @@
+Client
+
+const [notes, setNotes] = useState<any[] | null>(null)
+  const supabase = createClient()
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await supabase.from('notes').select()
+      setNotes(data)
+    }
+    getData()
+  }, [])
+
+Server
+
+const supabase = createClient()
+const { data: notes } = await supabase.from('notes').select()
+
+Sign out
+    Just call this when they click logout
+
+const supabase = createClient();
+const signOut = async () => {
+    "use server";
+
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    return redirect("/login");
+  };
+
+
+check if user logged info
+
+const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  * now user stores user info
