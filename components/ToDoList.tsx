@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ToDoType } from "./ToDoTypes";
+import ToDoCard from "./ToDoCard";
 
 interface Props {
   todos: ToDoType[];
@@ -11,7 +12,7 @@ export default function ToDoList({ todos }: Props) {
   return (
     <>
       {todos.map((todo) => (
-        <div key={todo.id}>{todo.title}</div>
+        <ToDoCard todo={todo} key={todo.id} />
       ))}
     </>
   );

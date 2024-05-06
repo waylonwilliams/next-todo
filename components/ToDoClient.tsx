@@ -44,7 +44,7 @@ export default function ToDoClient({ user }: Props) {
     const { error } = await supabase.from("todosnew").upsert({
       id: id,
       user_id: user_id,
-      title: "Updated",
+      title: title,
       description: description,
       complete: complete,
       due_date: due_date,
@@ -62,9 +62,6 @@ export default function ToDoClient({ user }: Props) {
     <>
       <CreateToDo />
       <ToDoList todos={todos} />
-      <button className="btn" onClick={() => updateTodo(todos[0])}>
-        Update something
-      </button>
     </>
   );
 }
