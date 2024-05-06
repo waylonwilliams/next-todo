@@ -14,26 +14,56 @@ export default function ToDoClient({ user }: Props) {
   const supabase = createClient();
   const [todos, setTodos] = useState<ToDoType[]>([]);
 
-  const getData = useCallback(async () => {
+  const getTodo = useCallback(async () => {
     const { data, error } = await supabase
-      .from("todos")
-      .select("*")
+      .from("todosnew")
+      .select()
       .eq("user_id", user?.id);
     if (error) {
       console.error(error);
     } else {
       setTodos(data);
+      console.log(data);
     }
   }, [supabase, user]);
 
   useEffect(() => {
-    getData();
-  }, [user, getData]);
+    getTodo();
+  }, [user, getTodo]);
+
+  async function updateTodo({
+    id,
+    user_id,
+    title,
+    description,
+    complete,
+    due_date,
+    created_at,
+  }: ToDoType) {
+    const { error } = await supabase.from("todosnew").upsert({
+      id: id,
+      user_id: user_id,
+      title: "Updated",
+      description: description,
+      complete: complete,
+      due_date: due_date,
+      created_at: created_at,
+    });
+    if (error) {
+      console.error(error);
+    } else {
+      // set states instead of calling getTodo again
+      getTodo();
+    }
+  }
 
   return (
     <>
       <CreateToDo />
       <ToDoList todos={todos} />
+      <button className="btn" onClick={() => updateTodo(todos[0])}>
+        Update something
+      </button>
     </>
   );
 }

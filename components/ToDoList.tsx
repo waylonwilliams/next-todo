@@ -11,7 +11,7 @@ export default function ToDoList({ todos }: Props) {
   return (
     <>
       {todos.map((todo) => (
-        <div>{todo.title}</div>
+        <div key={todo.id}>{todo.title}</div>
       ))}
     </>
   );
