@@ -19,6 +19,7 @@ export default function ToDoClient({ user }: Props) {
       .from("todosnew")
       .select()
       .eq("user_id", user?.id);
+    // order db fetch by due date and completion
     if (error) {
       console.error(error);
     } else {
