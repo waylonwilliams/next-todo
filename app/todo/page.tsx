@@ -1,8 +1,9 @@
 import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import ToDoClient from "@/components/ToDoClient";
 
-export default async function ProtectedPage() {
+export default async function Todo() {
   const supabase = createClient();
 
   const {
@@ -16,6 +17,7 @@ export default async function ProtectedPage() {
   return (
     <>
       <AuthButton />
+      <ToDoClient />
     </>
   );
 }
