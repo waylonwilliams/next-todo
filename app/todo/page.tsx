@@ -17,7 +17,7 @@ export default async function Todo() {
   return (
     <>
       <AuthButton />
-      <ToDoClient />
+      <ToDoClient user={user} />
     </>
   );
 }

@@ -1,8 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { ToDoType } from "./ToDoTypes";
 
-export default function ToDoList() {
-  const [posts, setPosts] = useState([]);
-  return <></>;
+interface Props {
+  todos: ToDoType[];
+}
+
+export default function ToDoList({ todos }: Props) {
+  return (
+    <>
+      {todos.map((todo) => (
+        <div>{todo.title}</div>
+      ))}
+    </>
+  );
 }
