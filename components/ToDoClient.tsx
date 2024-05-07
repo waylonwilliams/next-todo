@@ -24,7 +24,6 @@ export default function ToDoClient({ user }: Props) {
       console.error(error);
     } else {
       setTodos(data);
-      console.log(data);
     }
   }, [supabase, user]);
 
