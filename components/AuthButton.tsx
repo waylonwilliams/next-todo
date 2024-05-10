@@ -18,14 +18,14 @@ export default async function AuthButton() {
   };
 
   return user ? (
-    <div className="flex bg-neutral justify-end p-2">
+    <div className="flex bg-neutral p-2 h-20 justify-end">
       <div className="m-5 text-neutral-content">{user.email}</div>
       <form action={signOut}>
         <button className="btn btn-neutral-content m-2">Logout</button>
       </form>
     </div>
   ) : (
-    <div className="flex bg-neutral justify-end p-2">
+    <div className="flex bg-neutral p-2 h-20 justify-end">
       <button className="btn btn-neutral-content m-2">
         <Link href="/login">Login</Link>
       </button>

@@ -10,10 +10,12 @@ export default async function Index() {
 
   return (
     <div>
-      <AuthButton />
+      <div className="absolute w-full">
+        <AuthButton />
+      </div>
       <div className="flex items-center justify-center h-screen">
-        <div className="block justify-center items-center">
-          <div className="text-black font-bold text-6xl">Home page</div>
+        <div className="block justify-center items-center text-center">
+          <div className="text-black font-bold text-7xl m-6">Home page</div>
           {user ? (
             <Link href={"/todo"} className="btn btn-primary btn-lg">
               Continue to your to-do
