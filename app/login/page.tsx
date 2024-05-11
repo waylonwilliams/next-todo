@@ -58,7 +58,7 @@ export default function Login({
       </Link>
       <div className="flex items-center justify-center h-screen">
         <div className="bg-base-200 w-1/4 h-2/5 rounded-xl flex items-center justify-center shadow-xl">
-          <form>
+          <form className="w-5/6">
             <div>
               <input
                 name="email"
@@ -76,7 +76,7 @@ export default function Login({
                 className="input input-lg text-base w-full"
               />
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-around">
               <SubmitButton
                 formAction={signIn}
                 pendingText="Signing In..."
@@ -92,7 +92,9 @@ export default function Login({
                 Sign Up
               </SubmitButton>
             </div>
-            <div>{searchParams?.message && <p>{searchParams.message}</p>}</div>
+            <div className="mt-4 text-center">
+              {searchParams?.message && <p>{searchParams.message}</p>}
+            </div>
           </form>
         </div>
       </div>
