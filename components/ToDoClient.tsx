@@ -5,6 +5,7 @@ import ToDoList from "./ToDoList";
 import { useCallback, useEffect, useState } from "react";
 import { ToDoType } from "./ToDoTypes";
 import { createClient } from "@/utils/supabase/client";
+import SortTodos from "./SortTodos";
 
 interface Props {
   user: User | null;
@@ -25,7 +26,8 @@ export default function ToDoClient({ user }: Props) {
     if (error) {
       console.error(error);
     } else {
-      setTodos(data);
+      const sortedTodos = SortTodos(data);
+      setTodos(sortedTodos);
     }
   }, [supabase, user]);
 

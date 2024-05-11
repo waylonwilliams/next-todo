@@ -4,6 +4,7 @@ import { ToDoType } from "./ToDoTypes";
 import ToDoCard from "./ToDoCard";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
+import SortTodos from "./SortTodos";
 
 interface Props {
   todos: ToDoType[];
@@ -53,7 +54,8 @@ export default function ToDoList({
 
     // remove old todo and insert new one
     const filteredTodos = todos.filter((t) => t.id !== editTodo.id);
-    setTodos([...filteredTodos, data[0]]);
+    const sortedTodos = SortTodos([...filteredTodos, data[0]]);
+    setTodos(sortedTodos);
 
     const dialog = document.getElementById("todo_modal_2") as HTMLDialogElement;
     if (dialog) dialog.close();

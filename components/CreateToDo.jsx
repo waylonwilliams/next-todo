@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/client";
+import SortTodos from "./SortTodos";
 
 export default function CreateToDo({ todos, setTodos }) {
   const supabase = createClient();
@@ -27,7 +28,8 @@ export default function CreateToDo({ todos, setTodos }) {
       console.error(error);
       return;
     }
-    setTodos([...todos, data[0]]);
+    const sortedTodos = SortTodos([...todos, data[0]]);
+    setTodos(sortedTodos);
     const dialog = document.getElementById("todo_modal");
     if (dialog) dialog.close();
   }
