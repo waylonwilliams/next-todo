@@ -5,6 +5,7 @@ import ToDoCard from "./ToDoCard";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import SortTodos from "./SortTodos";
+import { useEffect } from "react";
 
 interface Props {
   todos: ToDoType[];
@@ -61,10 +62,21 @@ export default function ToDoList({
     if (dialog) dialog.close();
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       {todos.map((todo) => (
-        <ToDoCard todo={todo} key={todo.id} setEditTodo={setEditTodo} />
+        <ToDoCard
+          todo={todo}
+          key={todo.id}
+          setEditTodo={setEditTodo}
+          user={user}
+          todos={todos}
+          setTodos={setTodos}
+        />
       ))}
 
       <dialog id="todo_modal_2" className="modal">
@@ -83,7 +95,7 @@ export default function ToDoList({
               name="title"
               type="text"
               required
-              value={editTodo.title}
+              value={editTodo.title || ""}
               onChange={(e) => {
                 let newTodo = { ...editTodo };
                 newTodo.title = e.target.value;

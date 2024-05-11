@@ -17,7 +17,6 @@ export default function ToDoClient({ user }: Props) {
   const [editTodo, setEditTodo] = useState<ToDoType>({} as ToDoType);
 
   const getTodo = useCallback(async () => {
-    console.log("Fetching todos");
     const { data, error } = await supabase
       .from("todosnew")
       .select()
@@ -36,7 +35,7 @@ export default function ToDoClient({ user }: Props) {
   }, [user, getTodo]);
 
   return (
-    <>
+    <div className="flex flex-col mt-5 justify-center items-center">
       <CreateToDo todos={todos} setTodos={setTodos} />
       <ToDoList
         todos={todos}
@@ -45,6 +44,6 @@ export default function ToDoClient({ user }: Props) {
         setEditTodo={setEditTodo}
         user={user}
       />
-    </>
+    </div>
   );
 }
