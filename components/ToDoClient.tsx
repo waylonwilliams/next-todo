@@ -5,6 +5,7 @@ import ToDoList from "./ToDoList";
 import { useCallback, useEffect, useState } from "react";
 import { ToDoType } from "./ToDoTypes";
 import { createClient } from "@/utils/supabase/client";
+import todoContext from "./ToDoContext";
 
 interface Props {
   user: User | null;
@@ -58,9 +59,9 @@ export default function ToDoClient({ user }: Props) {
   }
 
   return (
-    <>
+    <todoContext.Provider value={{ todos: todos, setTodos: setTodos }}>
       <CreateToDo todos={todos} setTodos={setTodos} />
       <ToDoList todos={todos} />
-    </>
+    </todoContext.Provider>
   );
 }

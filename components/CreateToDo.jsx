@@ -1,11 +1,6 @@
-import { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 
 export default function CreateToDo({ todos, setTodos }) {
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [date, setDate] = useState("");
-
   const supabase = createClient();
 
   async function insertTodo(event) {

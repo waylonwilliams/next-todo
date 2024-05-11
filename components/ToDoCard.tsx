@@ -1,5 +1,6 @@
 import { ToDoType } from "./ToDoTypes";
 import Image from "next/image";
+import EditButton from "./EditButton.jsx";
 
 interface Props {
   todo: ToDoType;
@@ -37,9 +38,7 @@ export default function ToDoCard({ todo }: Props) {
       </div>
 
       {/* EDIT */}
-      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-        <Image src="/images/pencil.png" alt="Edit" width={20} height={20} />
-      </button>
+      <EditButton todo={todo} />
     </div>
   );
 }
