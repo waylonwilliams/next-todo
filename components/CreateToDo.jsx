@@ -1,4 +1,39 @@
-export default function CreateToDo() {
+import { useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+
+export default function CreateToDo({ todos, setTodos }) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+
+  const supabase = createClient();
+
+  async function insertTodo() {
+    const { data, error } = await supabase
+      .from("todosnew")
+      .insert([
+        {
+          title: title == "" ? null : title,
+          description: description == "" ? null : description,
+          due_date: date == "" ? null : date,
+          complete: false,
+          user_id: (await supabase.auth.getUser()).data.user.id,
+        },
+      ])
+      .select();
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+    setTodos([...todos, data[0]]);
+    setDate("");
+    setDescription("");
+    setTitle("");
+    const dialog = document.getElementById("todo_modal");
+    if (dialog) dialog.close();
+  }
+
   return (
     <>
       <button
@@ -10,6 +45,7 @@ export default function CreateToDo() {
       >
         Create new to-do
       </button>
+
       <dialog id="todo_modal" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">New to-do</h3>
@@ -21,6 +57,8 @@ export default function CreateToDo() {
             id="title"
             name="title"
             type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             className="w-full px-2 py-1 border rounded-lg mt-1"
           />
 
@@ -34,25 +72,40 @@ export default function CreateToDo() {
             id="description"
             name="description"
             type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             className="w-full px-2 py-1 border rounded-lg mt-1"
             rows={4}
           />
 
           <label htmlFor="date" className="block mt-2 text-sm text-gray-600">
-            Date
+            Complete by
           </label>
           <input
             id="date"
             name="date"
             type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className="w-full px-2 py-1 border rounded-lg mt-1"
           />
 
-          <button className="btn btn-primary">Create</button>
+          <div className="flex justify-center">
+            <button className="btn btn-primary mt-5" onClick={insertTodo}>
+              Create
+            </button>
+          </div>
 
           <div className="modal-action">
             <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              <button
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                onClick={() => {
+                  setDate("");
+                  setDescription("");
+                  setTitle("");
+                }}
+              >
                 ✕
               </button>
             </form>

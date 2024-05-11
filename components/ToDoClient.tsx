@@ -59,7 +59,7 @@ export default function ToDoClient({ user }: Props) {
 
   return (
     <>
-      <CreateToDo />
+      <CreateToDo todos={todos} setTodos={setTodos} />
       <ToDoList todos={todos} />
     </>
   );
