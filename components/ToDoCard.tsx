@@ -4,9 +4,10 @@ import EditButton from "./EditButton.jsx";
 
 interface Props {
   todo: ToDoType;
+  setEditTodo: React.Dispatch<React.SetStateAction<ToDoType>>;
 }
 
-export default function ToDoCard({ todo }: Props) {
+export default function ToDoCard({ todo, setEditTodo }: Props) {
   return (
     <div className="w-1/2 bg-base-100 shadow-xl p-6 rounded-lg m-2 relative">
       <div className="flex items-center">
@@ -38,7 +39,7 @@ export default function ToDoCard({ todo }: Props) {
       </div>
 
       {/* EDIT */}
-      <EditButton todo={todo} />
+      <EditButton todo={todo} setEditTodo={setEditTodo} />
     </div>
   );
 }

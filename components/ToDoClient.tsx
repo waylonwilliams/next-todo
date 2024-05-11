@@ -5,7 +5,6 @@ import ToDoList from "./ToDoList";
 import { useCallback, useEffect, useState } from "react";
 import { ToDoType } from "./ToDoTypes";
 import { createClient } from "@/utils/supabase/client";
-import todoContext from "./ToDoContext";
 
 interface Props {
   user: User | null;
@@ -14,8 +13,10 @@ interface Props {
 export default function ToDoClient({ user }: Props) {
   const supabase = createClient();
   const [todos, setTodos] = useState<ToDoType[]>([]);
+  const [editTodo, setEditTodo] = useState<ToDoType>({} as ToDoType);
 
   const getTodo = useCallback(async () => {
+    console.log("Fetching todos");
     const { data, error } = await supabase
       .from("todosnew")
       .select()
@@ -32,36 +33,16 @@ export default function ToDoClient({ user }: Props) {
     getTodo();
   }, [user, getTodo]);
 
-  async function updateTodo({
-    id,
-    user_id,
-    title,
-    description,
-    complete,
-    due_date,
-    created_at,
-  }: ToDoType) {
-    const { error } = await supabase.from("todosnew").upsert({
-      id: id,
-      user_id: user_id,
-      title: title,
-      description: description,
-      complete: complete,
-      due_date: due_date,
-      created_at: created_at,
-    });
-    if (error) {
-      console.error(error);
-    } else {
-      // set states instead of calling getTodo again
-      getTodo();
-    }
-  }
-
   return (
-    <todoContext.Provider value={{ todos: todos, setTodos: setTodos }}>
+    <>
       <CreateToDo todos={todos} setTodos={setTodos} />
-      <ToDoList todos={todos} />
-    </todoContext.Provider>
+      <ToDoList
+        todos={todos}
+        setTodos={setTodos}
+        editTodo={editTodo}
+        setEditTodo={setEditTodo}
+        user={user}
+      />
+    </>
   );
 }
