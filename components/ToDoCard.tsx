@@ -54,11 +54,11 @@ export default function ToDoCard({
   }`;
 
   return (
-    <div className="w-1/2 bg-base-100 shadow-xl p-6 rounded-lg m-2 relative">
+    <div className="sm:w-1/2 w-4/5 bg-base-100 shadow-xl p-6 rounded-lg m-2 relative">
       <div className="flex justify-between">
         <h2
           className={
-            "font-bold text-xl" +
+            "font-bold text-xl max-w-40 sm:max-w-lg overflow-auto" +
             (todo.complete ? " text-base-300" : "") +
             (todo.description == null ? " mb-6" : "")
           }
@@ -76,7 +76,12 @@ export default function ToDoCard({
           </h6>
         )}
       </div>
-      <p className={"w-4/5" + (todo.complete ? " text-gray-200" : "")}>
+      <p
+        className={
+          "w-4/5 max-w-52 sm:max-w-2xl text-wrap whitespace-normal break-words" +
+          (todo.complete ? " text-gray-200" : "")
+        }
+      >
         {todo.description}
       </p>
 

@@ -57,7 +57,7 @@ export default function Login({
         Back
       </Link>
       <div className="flex items-center justify-center h-screen">
-        <div className="bg-base-200 w-1/4 h-2/5 rounded-xl flex items-center justify-center shadow-xl">
+        <div className="bg-base-200 sm:w-1/4 w-3/4 h-2/5 rounded-xl flex items-center justify-center shadow-xl">
           <form className="w-5/6">
             <div>
               <input

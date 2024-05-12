@@ -28,12 +28,6 @@ export default function ToDoList({
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    console.log(
-      "Inserting new todo:",
-      formData.get("title"),
-      formData.get("description"),
-      formData.get("date")
-    );
 
     const { data, error } = await supabase
       .from("todosnew")
