@@ -5,7 +5,7 @@ import ToDoCard from "./ToDoCard";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import SortTodos from "./SortTodos";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   todos: ToDoType[];
@@ -13,6 +13,7 @@ interface Props {
   editTodo: ToDoType;
   setEditTodo: React.Dispatch<React.SetStateAction<ToDoType>>;
   user: User | null;
+  setToast: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ToDoList({
@@ -21,11 +22,13 @@ export default function ToDoList({
   editTodo,
   setEditTodo,
   user,
+  setToast,
 }: Props) {
   const supabase = createClient();
 
   async function insertTodo(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setToast(true);
 
     const formData = new FormData(event.currentTarget);
 

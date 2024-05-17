@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ToDoType } from "./ToDoTypes";
 import { createClient } from "@/utils/supabase/client";
 import SortTodos from "./SortTodos";
+import Toast from "./Toast";
 
 interface Props {
   user: User | null;
@@ -15,6 +16,7 @@ export default function ToDoClient({ user }: Props) {
   const supabase = createClient();
   const [todos, setTodos] = useState<ToDoType[]>([]);
   const [editTodo, setEditTodo] = useState<ToDoType>({} as ToDoType);
+  const [toast, setToast] = useState(false);
 
   const getTodo = useCallback(async () => {
     const { data, error } = await supabase
@@ -43,7 +45,9 @@ export default function ToDoClient({ user }: Props) {
         editTodo={editTodo}
         setEditTodo={setEditTodo}
         user={user}
+        setToast={setToast}
       />
+      <Toast toast={toast} setToast={setToast} />
     </div>
   );
 }
